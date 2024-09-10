@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8pyfayy1tp0q"]
+
+[ext_resource type="Script" path="res://scenes/Player.cs" id="1_1u0n6"]
+[ext_resource type="PackedScene" uid="uid://kkb4be0fulxb" path="res://assets/Models/Walking (1).fbx" id="1_oahlf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_q0ybp"]
+radius = 0.3
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_1u0n6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_q0ybp")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Walking (1)" parent="Visuals" instance=ExtResource("1_oahlf")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CameraMount" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24682, -0.0186272)
+
+[node name="Camera3D" type="Camera3D" parent="CameraMount"]
+transform = Transform3D(1, 0, 0, 0, 0.956402, 0.292055, 0, -0.292055, 0.956402, 0, 1.43932, 3.41735)
