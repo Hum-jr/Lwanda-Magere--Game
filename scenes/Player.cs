@@ -16,6 +16,7 @@ public partial class Player : CharacterBody3D
         base._Ready();
         Input.MouseMode = Input.MouseModeEnum.Captured;
         _animationPlayer = GetNode<AnimationPlayer>("Visuals/Player/AnimationPlayer");
+        _animationPlayer.Play("Armature|Idle_001");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -26,12 +27,14 @@ public partial class Player : CharacterBody3D
         if (!IsOnFloor())
         {
             velocity += GetGravity() * (float)delta;
+            
         }
 
         // Handle Jump.
         if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
         {
             velocity.Y = JumpVelocity;
+            _animationPlayer.Play("Armature|Jump_002");
         }
 
         // Get the input direction and handle the movement/deceleration.
@@ -43,7 +46,7 @@ public partial class Player : CharacterBody3D
             velocity.X = direction.X * Speed;
             velocity.Z = direction.Z * Speed;
 			
-            _animationPlayer.Play("mixamo_com");
+            _animationPlayer.Play("Walk");
 
 			
         }
@@ -51,7 +54,7 @@ public partial class Player : CharacterBody3D
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
             velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
-            _animationPlayer.Play("Take 001");
+            _animationPlayer.Play("Idle");
         }
 
         Velocity = velocity;
