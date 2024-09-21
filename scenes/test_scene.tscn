@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://h5pekw4xvuhk"]
+[gd_scene load_steps=80 format=3 uid="uid://h5pekw4xvuhk"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_5rnbv"]
 [ext_resource type="Texture2D" uid="uid://6tqxam2mt24s" path="res://assets/textures/Poliigon_GrassPatchyGround_4585/2K/Poliigon_GrassPatchyGround_4585_BaseColor.jpg" id="2_cva3e"]
@@ -17,9 +17,10 @@
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZoneResource.cs" id="12_tq2ee"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="13_0l1gy"]
 [ext_resource type="Texture2D" uid="uid://ih4kvu3lm5yc" path="res://terraData/Foliage_0_0_0.res" id="13_62tiq"]
-[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ObjectResource.cs" id="13_siobx"]
-[ext_resource type="Texture2D" path="res://terraData/Object_0_0_0.res" id="16_4x7u2"]
+[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/WaterResource.cs" id="16_2wp6r"]
+[ext_resource type="Texture2D" uid="uid://bidgtp6h7ym3f" path="res://terraData/Object_0_0_0.res" id="16_4x7u2"]
 [ext_resource type="ArrayMesh" uid="uid://dfskn5joo8b3v" path="res://assets/Models/OBJ format/tree_pineTallA.obj" id="20_at2vs"]
+[ext_resource type="Texture2D" uid="uid://d3ps2sh4re2kp" path="res://terraData/Water_0_0.res" id="21_0s55h"]
 [ext_resource type="ArrayMesh" uid="uid://b0rt5d56fwjj5" path="res://assets/Models/OBJ format/tree_plateau.obj" id="21_gjygr"]
 [ext_resource type="ArrayMesh" uid="uid://c570xyq7dbyj1" path="res://assets/Models/OBJ format/tree_simple.obj" id="22_pn08m"]
 [ext_resource type="ArrayMesh" uid="uid://bx8do7d3o58cp" path="res://assets/Models/OBJ format/tree_plateau_dark.obj" id="23_mrygu"]
@@ -60,7 +61,8 @@
 [ext_resource type="ArrayMesh" uid="uid://b6ajw8peu6s3i" path="res://assets/Models/OBJ format/tree_detailed.obj" id="58_vqsfc"]
 [ext_resource type="ArrayMesh" uid="uid://b0ogv2o8dhhu0" path="res://assets/Models/OBJ format/tree_detailed_dark.obj" id="59_jpyth"]
 [ext_resource type="Script" path="res://scenes/Player.cs" id="60_8fg5f"]
-[ext_resource type="PackedScene" uid="uid://kkb4be0fulxb" path="res://assets/Models/Walking (1).fbx" id="61_nck5x"]
+[ext_resource type="PackedScene" uid="uid://deef6s8c2v3nt" path="res://assets/player.blend" id="65_nwqyf"]
+[ext_resource type="PackedScene" uid="uid://b1kivkasbwnhr" path="res://assets/Models/untitled.blend" id="67_tafwf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ru21n"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -128,9 +130,27 @@ VisualInstanceLayers = 1
 script = ExtResource("12_b50rf")
 Definition = SubResource("Resource_crlep")
 
-[sub_resource type="Resource" id="Resource_x4unu"]
-script = ExtResource("13_siobx")
-Hide = false
+[sub_resource type="Resource" id="Resource_mcsma"]
+script = ExtResource("16_2wp6r")
+WaterFactor = 1.0
+WaterInnerOffset = 0.2
+WaterColor = Color(0.329412, 1, 1, 1)
+WaterFresnelColor = Color(0.666979, 0.867092, 0.865723, 1)
+WaterMetallic = 0.0
+WaterRoughness = 0.0
+WaterTimeScale = 0.1
+WaterStrength = 0.4
+WaterNoiseScale = 10.0
+WaterHeightScale = 0.15
+WaterColorDeep = Color(0, 0.478269, 0.478329, 1)
+WaterColorShallow = Color(0.521141, 0.521141, 0.521141, 1)
+WaterBeersLaw = 2.0
+WaterDepthOffset = -0.75
+WaterEdgeScale = 0.1
+WaterNear = 0.5
+WaterFar = 100.0
+WaterEdgeColor = Color(1, 1, 1, 1)
+VisualInstanceLayers = 1
 
 [sub_resource type="Resource" id="Resource_wcl6v"]
 script = ExtResource("12_tq2ee")
@@ -139,6 +159,7 @@ HeightMapTexture = ExtResource("10_na24a")
 SplatmapsTexture = [ExtResource("11_p7qcj")]
 FoliagesTexture = [ExtResource("13_62tiq")]
 ObjectsTexture = [ExtResource("16_4x7u2")]
+WaterTexture = ExtResource("21_0s55h")
 
 [sub_resource type="Resource" id="Resource_54g6i"]
 script = ExtResource("13_0l1gy")
@@ -164,7 +185,8 @@ script = ExtResource("1_5rnbv")
 DataPath = "res://terraData"
 TextureSets = SubResource("Resource_xhbv5")
 Foliages = [SubResource("Resource_kxghy")]
-Objects = [SubResource("Resource_x4unu")]
+Objects = []
+WaterDefinition = SubResource("Resource_mcsma")
 TerrainZones = SubResource("Resource_54g6i")
 metadata/_edit_lock_ = false
 
@@ -511,6 +533,7 @@ mesh = ExtResource("59_jpyth")
 skeleton = NodePath("../..")
 
 [node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.86638, 0)
 script = ExtResource("60_8fg5f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -519,7 +542,7 @@ shape = SubResource("CylinderShape3D_q0ybp")
 
 [node name="Visuals" type="Node3D" parent="Player"]
 
-[node name="Player" parent="Player/Visuals" instance=ExtResource("61_nck5x")]
+[node name="player" parent="Player/Visuals" instance=ExtResource("65_nwqyf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="CameraMount" type="Node3D" parent="Player"]
@@ -527,3 +550,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24682, -0.0186272)
 
 [node name="Camera3D" type="Camera3D" parent="Player/CameraMount"]
 transform = Transform3D(1, 0, 0, 0, 0.956402, 0.292055, 0, -0.292055, 0.956402, 0, 1.43932, 3.41735)
+
+[node name="untitled" parent="." instance=ExtResource("67_tafwf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.3616, 0.689979, 5.97336)

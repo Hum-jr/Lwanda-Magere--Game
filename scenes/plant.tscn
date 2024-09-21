@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xkk6hlhygvpf"]
+
+[ext_resource type="PackedScene" uid="uid://bopg42jjyqneu" path="res://scenes/Hoewa_Forsteriana_OBJ/hoewa_Forsteriana_2.glb" id="1_clq0a"]
+
+[node name="Plant" type="Node3D"]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
+
+[node name="hoewa_Forsteriana_2" parent="." instance=ExtResource("1_clq0a")]
